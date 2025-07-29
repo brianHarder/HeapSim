@@ -1,0 +1,39 @@
+# Build artifacts
+*.o
+*.obj
+*.exe
+*.out
+*.app
+
+# Executable
+heapsim
+
+# Object files in src directory
+src/*.o
+
+# macOS system files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.temp
+
+# Log files
+*.log
+
+# Backup files
+*.bak
+*.backup
