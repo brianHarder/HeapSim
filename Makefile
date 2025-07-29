@@ -6,7 +6,7 @@ CFLAGS = -Wall -Wextra -std=c99 -Isrc
 TARGET = heapsim
 
 # Source files (now in src directory)
-SOURCES = src/cli.c src/init.c src/first_fit.c src/best_fit.c src/worst_fit.c src/next_fit.c src/buddy_system.c src/buddy_free.c src/sfree.c src/visualize.c
+SOURCES = src/cli.c src/init.c src/first_fit.c src/best_fit.c src/worst_fit.c src/next_fit.c src/buddy_system.c src/buddy_free.c src/free_block.c src/visualize.c
 OBJECTS = $(SOURCES:.c=.o)
 
 # Default target
