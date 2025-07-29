@@ -19,7 +19,7 @@ void free_block(void *ptr) {
     char *heap_base = (char*)heap_start;
     char *heap_end  = heap_base + heap_size;
 
-    // —— coalesce with next if it’s actually in the heap and free ——  
+    // coalesce with next
     char *next_addr = (char*)hdr + hdr->size;
     if ( next_addr + HEADER_SIZE <= heap_end ) {
         block_header *next = (block_header *)next_addr;
@@ -34,23 +34,23 @@ void free_block(void *ptr) {
         }
     }
 
-    // —— coalesce with prev if it’s actually in the heap and free ——  
+    // coalesce with prev 
     if ((char*)hdr - FOOTER_SIZE >= heap_base) {
         block_footer *prev_ftr = (block_footer *)((char *)hdr - FOOTER_SIZE);
         if (!prev_ftr->allocated) {
             block_header *prev = (block_header *)((char *)hdr - prev_ftr->size);
-            // unlink prev
+            
             if (prev->prev) prev->prev->next = prev->next;
             if (prev->next) prev->next->prev = prev->prev;
             if (free_list == prev) free_list = prev->next;
-            // absorb into prev
+            
             prev->size += hdr->size;
             write_footer(prev);
             hdr = prev;
         }
     }
 
-    // —— re‑insert hdr into the free‑list in address order ——  
+    // re‑insert hdr into the free‑list in address order
     hdr->prev = hdr->next = NULL;
     if (!free_list) {
         free_list = hdr;
