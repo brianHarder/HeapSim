@@ -15,7 +15,6 @@ void free_block(void *ptr) {
     hdr->allocated = 0;
     write_footer(hdr);
 
-    // bounds for coalescing
     char *heap_base = (char*)heap_start;
     char *heap_end  = heap_base + heap_size;
 
@@ -24,17 +23,16 @@ void free_block(void *ptr) {
     if ( next_addr + HEADER_SIZE <= heap_end ) {
         block_header *next = (block_header *)next_addr;
         if (!next->allocated) {
-            // unlink next
             if (next->prev) next->prev->next = next->next;
             if (next->next) next->next->prev = next->prev;
             if (free_list == next) free_list = next->next;
-            // absorb
+            
             hdr->size += next->size;
             write_footer(hdr);
         }
     }
 
-    // coalesce with prev 
+    // coalesce with prev
     if ((char*)hdr - FOOTER_SIZE >= heap_base) {
         block_footer *prev_ftr = (block_footer *)((char *)hdr - FOOTER_SIZE);
         if (!prev_ftr->allocated) {
