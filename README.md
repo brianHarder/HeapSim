@@ -1,8 +1,8 @@
 # HeapSim
 
-## Projet Overview
+## Project Overview
 
-HeapSim is a learning tool for memory allocation.
+HeapSim is a learning tool for memory allocation algorithms and the memory heap. Users have the ability to allocate and free blocks based on their selected heuristic, and at any point they can obtain a visualization of the heap in its current state. The goal of the project is to strengthen people's understanding of key allocation algorithms throuhg visual learning.
 
 ## Features
 
